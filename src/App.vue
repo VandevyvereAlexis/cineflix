@@ -6,7 +6,7 @@
     <div v-if="$route.path == '/'">
 
       <!-- j'affiche le titre de l'accueil et sa selection de films (les + populaires) -->
-      <h1 class="pt-5 font-weight-light">
+      <h1 class="p-5 font-weight-light">
         Vos films préférés sont sur VueJS Movies !
       </h1>
 
@@ -40,43 +40,43 @@
 
 
 <script>
-// import d'axuos pour pouvoir faire des appels API 
-import axios from "axios"
-import HeaderNav from './components/template/HeaderNav'
-import FooterApp from './components/template/FooterApp'
-import MoviesList from './components/utils/MoviesList'
+  // import d'axios pour pouvoir faire des appels API 
+  import axios from "axios"
+  import HeaderNav from './components/template/HeaderNav'
+  import FooterApp from './components/template/FooterApp'
+  import MoviesList from './components/utils/MoviesList'
 
-export default {
+  export default {
 
-  name: 'App',
+    name: 'App',
 
-  components: {
-    FooterApp, HeaderNav, MoviesList
-  },
+    components: {
+      FooterApp, HeaderNav, MoviesList
+    },
 
-  data() {          // Je déclare les avriables disponibles dans un composant
-    return {        // La variable movies va contenir mles films récupérés par l'appli API
-      popularMovies: []
-    }
-  },
+    data() {          // Je déclare les avriables disponibles dans un composant
+      return {        // La variable movies va contenir les films récupérés par l'appli API
+        popularMovies: []
+      }
+    },
 
-  created() {
-    // code déclencher avant la génération du template par vue
-    // C'est ici que je vais lancer mon appel API 
+    created() {
+      // code déclencher avant la génération du template par vue
+      // C'est ici que je vais lancer mon appel API 
                                                                                                       //optionss : français + popularité descr + page 1
-    axios.get("https://api.themoviedb.org/3/discover/movie/?api_key=3ea8988340d4ed715d28b9978346c29e&language=fr&sort_by=popularity.desc&page=1")
-    // .then => cas ou l'appel API a reussi et renvoi un resultat
-    // .then prend en paramètre uen fonction félchée anonyme. res = réponse de l'API
-    .then( response => {
-      this.popularMovies = response.data.results    // Je stocke mes films récupérés dans la variable movies des data
-      console.log(this.popularMovies)
-    })
-    // .catch => cas ou l'appel échoue
-    .catch(() => this.error = true)
+      axios.get("https://api.themoviedb.org/3/discover/movie/?api_key=2c972f2ea32ef4add995d515d4567f25&language=fr&sort_by=popularity.desc&page=1")
+      // .then => cas ou l'appel API a reussi et renvoi un resultat
+      // .then prend en paramètre uen fonction félchée anonyme. res = réponse de l'API
+      .then( response => {
+        this.popularMovies = response.data.results    // Je stocke mes films récupérés dans la variable movies des data
+        console.log(this.popularMovies)
+      })
+      // .catch => cas ou l'appel échoue
+      .catch(() => this.error = true)
+
+    }
 
   }
-
-}
 </script>
 
 

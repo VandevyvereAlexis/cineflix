@@ -3,29 +3,40 @@
     <!-- v-bind:key="movie.id" : identifiant de chaque film -->
     <!-- v-bind permet d'injecter une variable en tant que valeur d'un attribut -->
 
-    
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img class="img-fluid rounded-start w-100" v-bind:src="urlDeBase + movie.poster_path" alt="Poster du film">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <p>{{ movie.title }}</p>
-                    <p>{{ movie.overview.substring(0, 200) + "..." }}</p>
-                    <p>note moyenne : {{ movie.vote_average }}</p>
-                    <p>{{ movie.votes_count }} votes</p>
-                </div>
-            </div>
+    <div class="card text-center">
+
+        <div class="card-header">
+
+            <h3 v-if="$route.path == '/Top50Movies'">
+                <span v-once>#{{ index + 1 }}</span>
+            </h3>
+            <p>{{ movie.title }}</p>
+
         </div>
+
+        <div class="card-body">
+            <img class="img-fluid rounded-start" v-bind:src="urlDeBase + movie.poster_path" alt="Poster du film">
+        </div>
+
+        <div class="card-footer text-body-secondary" style="height: 15rem;">
+            <p>{{ movie.overview.substring(0, 200) + "..." }}</p>
+            <p>note moyenne : {{ movie.vote_average }}</p>
+            <p>{{ movie.votes_count }} votes</p>
+        </div>
+
     </div>
+
+    
 
 </template>
 
 <script>
 export default {
     name: "MovieCard",
-    props : ['movie'],
+    props : [
+        "movie",
+        "index"
+    ],
 
     data() {
             // url de base des images de TMDM
