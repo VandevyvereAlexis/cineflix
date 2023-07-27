@@ -7,6 +7,7 @@ import FrenchMovies from "./components/FrenchMovies.vue";
 import LastMovies from "./components/LastMovies.vue";
 import Top50Movies from "./components/Top50Movies.vue";
 import SearchMovies from "./components/SearchMovies.vue";
+import MovieDetails from "./components/MovieDetails.vue";
 
 const routes = [            // on déclare routes
     {
@@ -32,6 +33,10 @@ const routes = [            // on déclare routes
     {
         path: '/SearchMovies', 
         component: SearchMovies,
+    },
+    {
+        path: '/MovieDetails/:id', 
+        component: MovieDetails,
     },
 ]
 

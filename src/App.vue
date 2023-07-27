@@ -1,14 +1,16 @@
 <template>
-  <div id="app">
+  <div id="app" class="mt-0">
     <HeaderNav/>
 
     <!-- si la route est / ( racine du site ) -->
     <div v-if="$route.path == '/'">
 
       <!-- j'affiche le titre de l'accueil et sa selection de films (les + populaires) -->
-      <h1 class="p-5 font-weight-light">
-        Vos films préférés sont sur VueJS Movies !
-      </h1>
+      <div class="rounded" id="titre_app">
+        <h1 class="p-5 font-weight-light">
+          Vos films préférés sont sur VueJS Movies !
+        </h1>
+      </div>
 
       <!-- en cas d'erreur de l'appel API -->
       <div v-if="error">
@@ -95,4 +97,13 @@
     color: #2c3e50;
     margin-top: 60px;
   } 
+
+  #titre_app {
+    background-image: url(./assets/nabil-saleh-a5RK_uk5Ej0-unsplash.jpg);
+    height: 50vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
 </style>
