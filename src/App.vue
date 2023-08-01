@@ -1,4 +1,5 @@
 <template>
+
   <div id="app" class="mt-0">
     <HeaderNav/>
 
@@ -6,10 +7,8 @@
     <div v-if="$route.path == '/'">
 
       <!-- j'affiche le titre de l'accueil et sa selection de films (les + populaires) -->
-      <div class="rounded" id="titre_app">
-        <h1 class="p-5 font-weight-light">
-          Vos films préférés sont sur VueJS Movies !
-        </h1>
+      <div class="d-flex align-items-center justify-content-center rounded-bottom" id="titre_app">
+        <h1 class="text-light">CineFlix</h1>
       </div>
 
       <!-- en cas d'erreur de l'appel API -->
@@ -19,6 +18,7 @@
 
       <!-- si appel API OK  -->
       <div v-else>
+        <SortButtons :movies="popularMovies"/>
         <!-- MoviesList affiche les films grâce à une boucle v-for -->
         <!-- v-bind : prop attendue = variable des datas (liste de films) -->
         <MoviesList :movies="popularMovies"/>
@@ -47,13 +47,14 @@
   import HeaderNav from './components/template/HeaderNav'
   import FooterApp from './components/template/FooterApp'
   import MoviesList from './components/utils/MoviesList'
+  import SortButtons from "./components/utils/SortButtons.vue"
 
   export default {
 
     name: 'App',
 
     components: {
-      FooterApp, HeaderNav, MoviesList
+      FooterApp, HeaderNav, MoviesList, SortButtons
     },
 
     data() {          // Je déclare les avriables disponibles dans un composant
@@ -89,6 +90,7 @@
 
 
 <style>
+
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -99,11 +101,25 @@
   } 
 
   #titre_app {
-    background-image: url(./assets/nabil-saleh-a5RK_uk5Ej0-unsplash.jpg);
+    background-image: url(./assets/fond.jpg);
     height: 50vh;
     width: 100%;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
   }
+
+  #titre_app h1 {
+    font-size: 10rem;
+    text-shadow: 10px 10px 0px rgb(0, 0, 0); 
+    letter-spacing:20px;
+  }
+
+  @media screen and ( max-width: 992px ) {
+    #titre_app h1 {
+      font-size: 4.5rem;
+      text-shadow: 4px 5px 0px rgb(0, 0, 0); 
+    }
+  }
+
 </style>

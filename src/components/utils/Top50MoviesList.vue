@@ -1,5 +1,7 @@
 <template>
-    <h1>Top50</h1>
+    <div>
+        <h1 class="text-light">Top50</h1>
+    </div>
 </template>
 
 <script>

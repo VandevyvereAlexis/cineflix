@@ -1,8 +1,11 @@
 <!-- Template -->
 <template>
 
-    <!-- Titre -->
-    <h1>Films Américain</h1>
+    <div class="d-flex align-items-center justify-content-center rounded-bottom" id="americanMovies">
+        <h1 class="text-light">Films Américain</h1>
+    </div>
+    
+    <SortButtons :movies="americanMovies"/>
     <MoviesList :movies="americanMovies"/>
 
 
@@ -15,13 +18,14 @@
 
     import axios from "axios"
     import MoviesList from './utils/MoviesList'
+    import SortButtons from "./utils/SortButtons.vue"
 
     export default {
 
         name: 'AmericanMovies',
 
         components: {
-            MoviesList
+            MoviesList, SortButtons
         },
 
         data() {                        // Je déclare les avriables disponibles dans un composant
@@ -55,3 +59,30 @@
 
 </script>
 
+
+
+
+
+<style>
+#americanMovies {
+    background-image: url(../assets/fond.jpg);
+    height: 50vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#americanMovies h1 {
+    font-size: 10rem;
+    text-shadow: 10px 10px 0px rgb(0, 0, 0);
+    letter-spacing: 5px;
+}
+
+@media screen and (max-width: 992px) {
+    #americanMovies h1 {
+        font-size: 4.5rem;
+        text-shadow: 4px 5px 0px rgb(0, 0, 0);
+    }
+}
+</style>

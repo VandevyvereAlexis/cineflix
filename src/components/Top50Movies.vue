@@ -1,5 +1,8 @@
 <template>
-    <h1>TopRatedMovies</h1>
+    <div class="d-flex align-items-center justify-content-center rounded-bottom" id="topMovies">
+        <h1 class="text-light">Top 50</h1>
+    </div>
+    <SortButtons :movies="topRatedMovies"/>
     <MoviesList :movies="topRatedMovies"/>
 </template>
 
@@ -8,13 +11,14 @@
 
     import axios from "axios"
     import MoviesList from './utils/MoviesList'
+    import SortButtons from "./utils/SortButtons.vue"
 
     export default {
 
         name: 'TopRatedMovies',
 
         components: {
-            MoviesList
+            MoviesList, SortButtons
         },
 
         data() {                        // Je déclare les avriables disponibles dans un composant
@@ -61,3 +65,28 @@
     }
 
 </script>
+
+
+<style>
+#topMovies {
+    background-image: url(../assets/fond.jpg);
+    height: 50vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#topMovies h1 {
+    font-size: 10rem;
+    text-shadow: 10px 10px 0px rgb(0, 0, 0);
+    letter-spacing: 5px;
+}
+
+@media screen and (max-width: 992px) {
+    #topMovies h1 {
+        font-size: 4.5rem;
+        text-shadow: 4px 5px 0px rgb(0, 0, 0);
+    }
+}
+</style>

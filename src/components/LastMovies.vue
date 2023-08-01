@@ -1,5 +1,8 @@
 <template>
-    <h1>LastMovies</h1>
+    <div class="d-flex align-items-center justify-content-center rounded-bottom" id="lastMovies">
+        <h1 class="text-light">Cette année</h1>
+    </div>
+    <SortButtons :movies="lastMovies"/>
     <MoviesList :movies="lastMovies"/>
 </template>
 
@@ -7,13 +10,14 @@
 
     import axios from "axios"
     import MoviesList from './utils/MoviesList'
+    import SortButtons from "./utils/SortButtons.vue"
 
     export default {
 
         name: 'LastMovies',
 
         components: {
-            MoviesList
+            MoviesList, SortButtons
         },
 
         data() {                        // Je déclare les avriables disponibles dans un composant
@@ -45,3 +49,30 @@
         }
     }
 </script>
+
+
+
+
+<style>
+#lastMovies {
+    background-image: url(../assets/fond.jpg);
+    height: 50vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#lastMovies h1 {
+    font-size: 10rem;
+    text-shadow: 10px 10px 0px rgb(0, 0, 0);
+    letter-spacing: 5px;
+}
+
+@media screen and (max-width: 992px) {
+    #lastMovies h1 {
+        font-size: 4.5rem;
+        text-shadow: 4px 5px 0px rgb(0, 0, 0);
+    }
+}
+</style>
