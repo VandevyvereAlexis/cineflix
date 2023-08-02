@@ -1,88 +1,107 @@
-<!-- Template -->
 <template>
-
+    <!-- Section titre -->
     <div class="d-flex align-items-center justify-content-center rounded-bottom" id="americanMovies">
+        <!-- Titre -->
         <h1 class="text-light">Films Américain</h1>
     </div>
     
+    <!-- Ici, nous utilisons les composants personnalisés "SortButtons" et "MoviesList" pour afficher une liste de films américains spécifiques. -->
+    <!-- Le composant "SortButtons" est utilisé pour fournir des boutons de tri, permettant aux utilisateurs de trier les films par titre, date de sortie ou note moyenne. Nous passons la liste de films "americanMovies" à ce composant via la propriété ":movies". Cela permettra au composant "SortButtons" d'accéder à cette liste de films et d'effectuer le tri en fonction des interactions de l'utilisateur. -->
     <SortButtons :movies="americanMovies"/>
+    <!-- Le composant "MoviesList" est utilisé pour afficher la liste de films américains triée ou non triée. Nous passons également la liste de films "americanMovies" à ce composant via la propriété ":movies". Ce composant affichera simplement les films dans l'ordre fourni sans effectuer de tri initial, car le tri sera géré par le composant "SortButtons". -->
     <MoviesList :movies="americanMovies"/>
-
-
-
 </template>
 
 
 
-<script>
 
+
+
+
+
+
+
+<script>
+    // Dans cette partie, nous importons les dépendances nécessaires, notamment le module "axios" pour effectuer des requêtes HTTP,
+    // ainsi que les composants personnalisés "MoviesList" et "SortButtons" depuis leurs fichiers respectifs.
     import axios from "axios"
     import MoviesList from './utils/MoviesList'
     import SortButtons from "./utils/SortButtons.vue"
 
     export default {
 
+        // Le nom du composant est défini ici en tant que "AmericanMovies".
         name: 'AmericanMovies',
 
+        // Dans la section "components", nous enregistrons les composants personnalisés "MoviesList" et "SortButtons"
+        // pour pouvoir les utiliser dans ce composant "AmericanMovies".
         components: {
             MoviesList, SortButtons
         },
 
-        data() {                        // Je déclare les avriables disponibles dans un composant
-            return {                    // La variable movies va contenir les films récupérés par l'appli API
+        // Dans la section "data", nous déclarons les variables disponibles dans le composant.
+        data() {   
+            // La variable "americanMovies" sera utilisée pour stocker les films récupérés à partir de l'API.
+            // Elle est initialement définie comme un tableau vide et sera remplie lorsque les données seront récupérées.                     
+            return {                    
                 americanMovies: []
             }
         },
 
         created() {
 
-            // code déclencher avant la génération du template par vue
-            // C'est ici que je vais lancer mon appel API 
-            //optionss : français + popularité descr + page 1
+            // Cette méthode "created()" est un "hook" du cycle de vie de Vue.js, qui est appelé avant la génération du template par Vue.
+
+            // Ici, nous allons effectuer un appel à l'API pour récupérer les films américains selon certaines options spécifiées.
+            // Nous utilisons la bibliothèque "axios" pour effectuer la requête HTTP GET à l'API.
+
 
             axios.get("https://api.themoviedb.org/3/discover/movie/?api_key=a5087ee297fbc59075d15615744b267d&language=fr&certification_country=us&sort_by=primary_release_date.desc&page=1&vote_count.gte=1000")
 
-            // .then => cas ou l'appel API a reussi et renvoi un resultat
-            // .then prend en paramètre uen fonction félchée anonyme. res = réponse de l'API
-
+            // Lorsque l'appel API réussit, le bloc "then" est exécuté avec la réponse (response) de l'API.
             .then(response => {
-                this.americanMovies = response.data.results             // Je stocke mes films récupérés dans la variable movies des data
+                // Nous stockons les films récupérés dans la variable "americanMovies" de la section "data".
+                // La propriété "results" de la réponse contient la liste des films renvoyés par l'API.
+                this.americanMovies = response.data.results            
                 console.log(this.americanMovies)
             })
 
-            // .catch => cas ou l'appel échoue
-
+            // En cas d'échec de l'appel API, le bloc "catch" est exécuté.
             .catch(() => this.error = true)
-
         }
-    }
 
+    }
 </script>
 
 
 
 
 
+
+
+
+
+
 <style>
-#americanMovies {
-    background-image: url(../assets/fond.jpg);
-    height: 50vh;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
+    #americanMovies {
+        background-image: url(../assets/fond.jpg);
+        height: 50vh;
+        width: 100%;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        }
 
-#americanMovies h1 {
-    font-size: 10rem;
-    text-shadow: 10px 10px 0px rgb(0, 0, 0);
-    letter-spacing: 5px;
-}
-
-@media screen and (max-width: 992px) {
     #americanMovies h1 {
-        font-size: 4.5rem;
-        text-shadow: 4px 5px 0px rgb(0, 0, 0);
+        font-size: 10rem;
+        text-shadow: 10px 10px 0px rgb(0, 0, 0);
+        letter-spacing: 5px;
+    }   
+
+    @media screen and (max-width: 992px) {
+        #americanMovies h1 {
+            font-size: 4.5rem;
+            text-shadow: 4px 5px 0px rgb(0, 0, 0);
+        }
     }
-}
 </style>
